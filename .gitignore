@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.txt
+*.TXT
+*.Txt
+=======
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.txt
+*.TXT
+*.Txt
+*.csv
+*.CSV
+>>>>>>> a73c12cc962303a0f3fe022945f1a31e801372fc
+/rockyou.txt
+/realhuman_phill.txt
+/DataBreaches(2004-2021).csv
+/rockyouClean.csv
+/rockyou21Clean.csv

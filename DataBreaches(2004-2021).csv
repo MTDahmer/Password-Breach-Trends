@@ -1,0 +1,296 @@
+Entity,Year,Records,Organization type,Method
+21st Century Oncology,2016,2200000,healthcare,external threat actor
+500px,2020,14870304,web,external threat actor
+Accendo Insurance Co.,2020,175350,healthcare,negligence
+Adobe Systems Incorporated,2013,152000000,tech,external threat actor
+Adobe Inc.,2019,7500000,tech,negligence
+Advocate Medical Group,2017,4000000,healthcare,lost / stolen hardware
+AerServ (subsidiary of InMobi),2018,75000,advertising,external threat actor
+"Affinity Health Plan, Inc.",2013,344579,healthcare,lost / stolen hardware
+Airtel,2019,320000000,telecommunications,negligence
+Air Canada,2018,20000,transport,external threat actor
+TD Ameritrade,2005,200000,financial,lost / stolen hardware
+Ancestry.com,2021,300000,web,negligence
+Animal Jam,2020,46000000,tech,external threat actor
+"Ankle & Foot Center of Tampa Bay, Inc.",2021,156000,healthcare,external threat actor
+Anthem Inc.,2021,80000000,healthcare,external threat actor
+AOL,2021,92000000,web,insider threat
+AOL,2021,20000000,web,accidentally uploaded
+AOL,2014,2400000,web,external threat actor
+"Apple, Inc./BlueToad",2021,12367232,tech,accidentally uploaded
+Apple,2021,275000,tech,external threat actor
+Apple Health Medicaid,2021,91000,healthcare,negligence
+Ashley Madison,2015,32000000,web,external threat actor
+AT&T,2008,113000,telecommunications,lost / stolen hardware
+AT&T,2010,114000,telecommunications,external threat actor
+Auction.co.kr,2008,18000000,web,external threat actor
+Automatic Data Processing,2005,125000,financial,negligence
+"AvMed, Inc.",2009,1220000,healthcare,lost / stolen hardware
+Bailey's Inc.,2015,250000,retail,external threat actor
+The Bank of New York Mellon,2008,12500000,financial,lost / stolen hardware
+Bank of America,2005,1200000,financial,lost / stolen hardware
+Bell Canada,2017,1900000,telecommunications,negligence
+Bell Canada,2018,100000,telecommunications,external threat actor
+Benesse,2014,35040000,academic,external threat actor
+Betfair,2010,2300000,web,external threat actor
+Bethesda Game Studios,2011,200000,tech,external threat actor
+Blank Media Games,2018,7633234,tech,external threat actor
+Blizzard Entertainment,2012,14000000,tech,external threat actor
+BlueCross BlueShield of Tennessee,2009,1023209,healthcare,lost / stolen hardware
+BMO and Simplii,2018,90000,financial,negligence
+2018 British Airways cyberattack,2018,500000,transport,external threat actor
+California Department of Child Support Services,2012,800000,government,lost / stolen hardware
+Canva,2019,140000000,web,external threat actor
+Capcom,2020,350000,tech,external threat actor
+Capital One,2019,106000000,financial,data exposed by misconfiguration
+"CardSystems Solutions Inc. (MasterCard, Visa, Discover Financial Services and American Express)",2005,40000000,financial,external threat actor
+Cathay Pacific Airways,2018,9400000,transport,external threat actor
+CareFirst BlueCross Blue Shield - Maryland,2015,1100000,healthcare,external threat actor
+Central Coast Credit Union,2016,60000,financial,external threat actor
+Central Hudson Gas & Electric,2013,110000,energy,external threat actor
+CheckFree Corporation,2009,5000000,financial,external threat actor
+CheckPeople,2020,56000000,tech,unknown
+China Software Developer Network,2011,6000000,web,external threat actor
+"Chinese gaming websites (three: Duowan, 7K7K, 178.com)",2011,10000000,web,external threat actor
+Citigroup,2005,3900000,financial,lost / stolen hardware
+Citigroup,2011,360083,financial,external threat actor
+Citigroup,2013,150000,financial,negligence
+City and Hackney Teaching Primary Care Trust,2007,160000,healthcare,lost / stolen hardware
+Colorado government,2010,105470,healthcare,lost / stolen hardware
+Community Health Systems,2014,4500000,healthcare,external threat actor
+Philippines Commission on Elections,2016,55000000,government,external threat actor
+Compass Bank,2007,1000000,financial,insider threat
+Countrywide Financial Corp,2006,2600000,financial,insider threat
+Countrywide Financial Corp,2011,2500000,financial,insider threat
+Centers for Medicare & Medicaid Services,2018,75000,healthcare,external threat actor
+Cox Communications,2016,40000,telecommunications,external threat actor
+"Crescent Health Inc., Walgreens",2013,100000,healthcare,lost / stolen hardware
+Dai Nippon Printing,2007,8637405,retail,insider threat
+"Data Processors International (MasterCard, Visa, Discover Financial Services and American Express)",2008,8000000,financial,external threat actor
+US Department of Homeland Security,2016,30000,government,negligence
+Desjardins,2019,9700000,financial,insider threat
+Domino's Pizza (France),2014,600000,web,external threat actor
+DoorDash,2019,4900000,web,external threat actor
+UK Driving Standards Agency,2007,3000000,government,lost / stolen hardware
+Dropbox,2012,68648009,web,external threat actor
+Drupal,2013,1000000,web,external threat actor
+DSW Inc.,2005,1400000,retail,external threat actor
+Dun & Bradstreet,2013,1000000,tech,external threat actor
+eBay,2014,145000000,web,external threat actor
+"Earl Enterprises(Buca di Beppo, Earl of Sandwich, Planet Hollywood,Chicken Guy, Mixology, Tequila Taqueria)",2018-2019,2000000,restaurant,external threat actor
+Educational Credit Management Corporation,2010,3300000,financial,lost / stolen hardware
+Eisenhower Medical Center,2011,514330,healthcare,lost / stolen hardware
+ElasticSearch,2019,108000000,tech,negligence
+Embassy Cables,2010,251000,government,insider threat
+"Emergency Healthcare Physicians, Ltd.",2010,180111,healthcare,lost / stolen hardware
+Emory Healthcare,2012,315000,healthcare,negligence
+Equifax,2017,163119000,financial,negligence
+Evernote,2013,50000000,web,external threat actor
+Exactis,2018,340000000,tech,negligence
+Excellus BlueCross BlueShield,2015,10000000,healthcare,external threat actor
+Experian - T-Mobile US,2015,15000000,telecommunications,external threat actor
+Facebook,2013,6000000,web,accidentally uploaded
+Facebook,2018,50000000,web,negligence
+Facebook,2019,540000000,web,negligence
+Facebook,2019,1500000,web,accidentally uploaded
+Facebook,2019,267000000,web,negligence
+Fast Retailing,2019,461091,retail,external threat actor
+Federal Reserve Bank of Cleveland,2010,400000,financial,external threat actor
+Fidelity National Information Services,2007,8500000,financial,insider threat
+First American Corporation,2019,885000000,financial,negligence
+Florida Department of Juvenile Justice,2013,100000,government,lost / stolen hardware
+Friend Finder Networks,2016,412214295,web,external threat actor
+Funimation,2016,2500000,web,external threat actor
+Formspring,2012,420000,web,accidentally uploaded
+Unknown,2020,201000000,government,negligence
+Gamigo,2012,8000000,web,external threat actor
+Gap Inc.,2007,800000,retail,lost / stolen hardware
+Gawker,2010,1500000,web,external threat actor
+Global Payments,2012,7000000,financial,external threat actor
+Gmail,2014,5000000,web,external threat actor
+Google Plus,2018,500000,web,negligence
+Greek government,2012,9000000,government,external threat actor
+Grozio Chirurgija,2017,25000,healthcare,external threat actor
+GS Caltex,2008,11100000,energy,insider threat
+Hannaford Brothers Supermarket Chain,2007,4200000,retail,external threat actor
+HauteLook,2018,28517244,retail,external threat actor
+Health Net,2009,500000,healthcare,lost / stolen hardware
+Health Net — IBM,2011,1900000,healthcare,lost / stolen hardware
+Health Sciences Authority (Singapore),2019,808000,healthcare,negligence
+Heartland,2009,130000000,financial,external threat actor
+Hewlett Packard,2006,200000,tech,lost / stolen hardware
+Hilton Hotels,2014 and 2015,363000,hotel,external threat actor
+Home Depot,2014,56000000,retail,external threat actor
+Honda Canada,2011,283000,retail,negligence
+Instagram,2020,200000000,web,negligence
+Internal Revenue Service,2015,720000,financial,external threat actor
+Inuvik hospital,2016,6700,healthcare,insider threat
+"Iranian banks (three: Saderat, Eghtesad Novin, and Saman)",2012,3000000,financial,external threat actor
+Japan Pension Service,2015,1250000,government,external threat actor
+Japanet Takata,2004,510000,retail,insider threat
+"Jefferson County, West Virginia",2008,1600000,government,accidentally uploaded
+JP Morgan Chase,2010,2600000,financial,lost / stolen hardware
+JP Morgan Chase,2014,76000000,financial,external threat actor
+Justdial,2019,100000000,tech,data exposed by misconfiguration
+KDDI,2006,4000000,telecommunications,external threat actor
+Kirkwood Community College,2013,125000,academic,external threat actor
+KM.RU,2016,1500000,web,external threat actor
+Korea Credit Bureau,2014,20000000,financial,insider threat
+Kroll Background America,2013,1000000,tech,external threat actor
+KT Corporation,2012,8700000,telecommunications,external threat actor
+LexisNexis,2014,1000000,tech,external threat actor
+LifeLabs,2019,15000000,healthcare,external threat actor
+Lincoln Medical & Mental Health Center,2010,130495,healthcare,lost / stolen hardware
+"LinkedIn, eHarmony, Last.fm",2012,8000000,web,accidentally uploaded
+Living Social,2013,50000000,web,external threat actor
+MacRumors.com,2014,860000,web,external threat actor
+Marriott International,2018,500000000,hotel,external threat actor
+Marriott International,2020,5200000,hotel,negligence
+Massachusetts Government,2011,210000,government,negligence
+Massive American business hack including 7-Eleven and Nasdaq,2012,160000000,financial,external threat actor
+US Medicaid,2012,780000,healthcare,external threat actor
+Medical Informatics Engineering,2015,3900000,healthcare,external threat actor
+Memorial Healthcare System,2011,102153,healthcare,lost / stolen hardware
+Michaels,2014,3000000,retail,external threat actor
+Microsoft,2019,250000000,tech,data exposed by misconfiguration
+Militarysingles.com,2012,163792,web,accidentally uploaded
+Ministry of Education (Chile),2008,6000000,government,accidentally uploaded
+Ministry of Health (Singapore),2019,14200,healthcare,negligence
+Mitsubishi Tokyo UFJ Bank,2006,960000,financial,insider threat
+MongoDB,2019,202000000,tech,negligence
+MongoDB,2019,275000000,tech,negligence
+Mobile TeleSystems (MTS),2019,100000000,telecommunications,misconfiguration
+Monster.com,2007,1600000,web,external threat actor
+Morgan Stanley Smith Barney,2011,34000,financial,lost / stolen hardware
+Mozilla,2014,76000,web,negligence
+MyHeritage,2018,92283889,tech,unknown
+Neiman Marcus,2014,1100000,retail,external threat actor
+Nemours Foundation,2011,1055489,healthcare,lost / stolen hardware
+Network Solutions,2009,573000,tech,external threat actor
+New York City Health & Hospitals Corp.,2010,1700000,healthcare,lost / stolen hardware
+New York State Electric & Gas,2012,1800000,energy,insider threat
+New York Taxis,2014,52000,transport,negligence
+Nexon Korea Corp,2011,13200000,web,external threat actor
+NHS,2011,8300000,healthcare,lost / stolen hardware
+Nintendo (Club Nintendo),2013,240000,tech,external threat actor
+Nintendo (Nintendo Account),2020,160000,tech,external threat actor
+Nippon Television,2016,430000,media,external threat actor
+Nival Networks,2016,1500000,tech,external threat actor
+Norwegian Tax Administration,2008,3950000,government,accidentally uploaded
+Now:Pensions,2020,30000,financial,rogue contractor
+US Office of Personnel Management,2015,21500000,government,external threat actor
+Office of the Texas Attorney General,2012,6500000,government,accidentally uploaded
+Ohio State University,2010,760000,academic,external threat actor
+Orbitz,2018,880000,web,external threat actor
+Patreon,2015,2300000,web,external threat actor
+PayPay,2020,20076016,financial,data exposed by misconfiguration
+Popsugar,2018,123857,retail,external threat actor
+Premera,2015,11000000,healthcare,external threat actor
+Puerto Rico Department of Health,2010,515000,healthcare,external threat actor
+Quest Diagnostics,2019,11900000,healthcare,negligence
+Quora,2018,100000000,web,external threat actor
+Rakuten,2020,1381735,web,data exposed by misconfiguration
+Rambler.ru,2012,98167935,web,external threat actor
+RBS Worldpay,2008,1500000,financial,external threat actor
+Restaurant Depot,2011,200000,retail,external threat actor
+RockYou!,2009,32000000,web,external threat actor
+"Sakai City, Japan",2015,680000,government,insider threat
+San Francisco Public Utilities Commission,2011,180000,government,external threat actor
+Scottrade,2015,4600000,financial,external threat actor
+Scribd,2013,500000,web,external threat actor
+"Seacoast Radiology, PA",2010,231400,healthcare,external threat actor
+Sega,2011,1290755,tech,external threat actor
+Service Personnel and Veterans Agency (UK),2008,50500,government,lost / stolen hardware
+SingHealth,2018,1500000,healthcare,external threat actor
+Slack,2015,500000,tech,negligence
+SlickWraps,2020,377428,retail,negligence
+SnapChat,2013,4700000,web,external threat actor
+Sony Online Entertainment,2011,24600000,tech,external threat actor
+Sony Pictures,2011,1000000,web,external threat actor
+Sony PlayStation Network,2011,77000000,tech,external threat actor
+South Africa police,2013,16000,government,external threat actor
+South Carolina Government,2012,6400000,healthcare,insider threat
+"South Shore Hospital, Massachusetts",2010,800000,healthcare,lost / stolen hardware
+Southern California Medical-Legal Consultants,2011,300000,healthcare,external threat actor
+Spartanburg Regional Healthcare System,2011,400000,healthcare,lost / stolen hardware
+Stanford University,2008,72000,academic,lost / stolen hardware
+Starbucks,2008,97000,retail,lost / stolen hardware
+State of Texas,2011,3500000,government,accidentally uploaded
+Steam,2011,35000000,web,external threat actor
+StockX,2019,6800000,retail,external threat actor
+Stratford,2011,935000,academic,accidentally uploaded
+Sutter Medical Center,2011,4243434,healthcare,lost / stolen hardware
+Syrian government (Syria Files),2012,2434899,government,external threat actor
+Taobao,2016,20000000,retail,external threat actor
+Taringa!,2017,28722877,web,external threat actor
+Target Corporation,2013,110000000,retail,external threat actor
+TaxSlayer.com,2016,8800,web,external threat actor
+TD Ameritrade,2007,6300000,financial,external threat actor
+TD Bank,2012,260000,financial,external threat actor
+TerraCom & YourTel,2013,170000,telecommunications,accidentally uploaded
+Tetrad,2020,120000000,financial,negligence
+Texas Lottery,2007,89000,government,insider threat
+Ticketfly (subsidiary of Eventbrite),2018,26151608,web,external threat actor
+Tianya Club,2011,28000000,web,external threat actor
+TikTok,2020,42000000,web,negligence
+TK / TJ Maxx,2007,94000000,retail,external threat actor
+"T-Mobile, Deutsche Telekom",2006,17000000,telecommunications,lost / stolen hardware
+T-Mobile,2021,45000000,telecommunications,external threat actor
+Tricare,2011,4901432,healthcare,lost / stolen hardware
+"Triple-S Salud, Inc.",2010,398000,healthcare,lost / stolen hardware
+Truecaller,2019,299055000,telecommunications,unknown
+Tumblr,2013,65469298,web,external threat actor
+Twitter,2013,250000,web,external threat actor
+Uber,2014,50000,tech,negligence
+Uber,2017,57000000,transport,external threat actor
+Ubuntu,2013,2000000,tech,external threat actor
+"UCLA Medical Center, Santa Monica",2015,4500000,healthcare,external threat actor
+UK Home Office,2008,84000,government,lost / stolen hardware
+UK Ministry of Defence,2008,1700000,government,lost / stolen hardware
+UK Revenue & Customs,2007,25000000,government,lost / stolen hardware
+Universiti Teknologi MARA,2019,1164540,academic,external threat actor
+Under Armour,2018,150000000,retail,external threat actor
+"University of California, Berkeley",2009,160000,academic,external threat actor
+"University of California, Berkeley",2016,80000,academic,external threat actor
+"University of Maryland, College Park",2014,300000,academic,external threat actor
+University of Central Florida,2016,63000,academic,external threat actor
+University of Miami,2008,2100000,academic,lost / stolen hardware
+University of Utah Hospital & Clinics,2008,2200000,academic,lost / stolen hardware
+University of Wisconsin–Milwaukee,2011,73000,academic,external threat actor
+United States Postal Service,2018,60000000,government,negligence
+U.S. Army,2011,50000,government,accidentally uploaded
+U.S. Army(classified Iraq War documents),2010,392000,government,insider threat
+U.S. Department of Defense,2009,72000,government,lost / stolen hardware
+U.S. Department of Veteran Affairs,2006,26500000,government,lost / stolen hardware
+U.S. law enforcement (70 different agencies),2011,123461,government,accidentally uploaded
+National Archives and Records Administration (U.S. military veterans records),2009,76000000,government,lost / stolen hardware
+U.S. government (United States diplomatic cables leak),2010,260000,government,insider threat
+National Guard of the United States,2009,131000,government,lost / stolen hardware
+Vastaamo,2020,130000,healthcare,external threat actor
+Verizon Communications,2016,1500000,telecommunications,external threat actor
+View Media,2020,38000000,online marketing,publicly accessible Amazon Web Services (AWS) server
+Virgin Media,2020,900000,mobile carrier,accidentally exposed
+Virginia Department of Health,2009,8257378,government,external threat actor
+Virginia Prescription Monitoring Program,2009,531400,healthcare,external threat actor
+Vodafone,2013,2000000,telecommunications,insider threat
+VTech,2015,5000000,retail,external threat actor
+Walmart,2015,1300000,retail,external threat actor
+Washington Post,2011,1270000,media,external threat actor
+Washington State court system,2013,160000,government,external threat actor
+Wattpad,2020,270000000,web,external threat actor
+Wawa (company),2020,30000000,retail,external threat actor
+Weebly,2016,43430316,web,external threat actor
+Writerspace.com,2011,62000,web,external threat actor
+Xat.com,2015,6054459,web,social engineering
+Yahoo,2013,30000000,web,external threat actor
+Yahoo,2014,500000000,web,external threat actor
+Yahoo Japan,2013,22000000,web,external threat actor
+Yahoo! Voices,2012,450000,web,external threat actor
+Yale University,2010,43000,academic,accidentally uploaded
+YouTube,2020,4000000,web,negligence
+Zappos,2012,24000000,web,external threat actor
+Zynga,2019,173000000,web,external threat actor
+Westpac,2019,98000,financial,external threat actor
+Unknown agency(believed to be tied to United States Census Bureau),2020,200000000,financial,accidentally uploaded
+National Health Information Center (NCZI) of Slovakia,2020,391250,healthcare,negligence
+Les Éditions Protégez-vous,2020,380000,publisher (magazine),unknown

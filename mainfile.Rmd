@@ -1,0 +1,392 @@
+---
+title: "A Break Down of Password Dumps and Data Breaches from 2004 to 2021"
+name: "Mitchell Dahmer"
+output: html_document
+date: "2022-11-14"
+---
+One of the hallmarks of a good cybersecurity system is that no one besides the user should ever know their password or PII (Personally Identifiable Information), and no one includes the system. When good services store passwords, they will perform a hashing algorithm and store the result rather than the password itself. This hashing algorithm works like a complicated random number generator that takes the password as it’s starting information,  does a bunch of intentionally convoluted functions, then spits out a giant string of numbers, letters and symbols based on the results. This is done so that if there is a data breach that leads to the organization's user data being exposed, the attacker is hopefully left with nothing but useless data.
+
+Now, these hashing algorithms are very hard to develop, because computers are actually really bad at being random. They only do what you tell them to and that makes every hash they could give you potentially reversible if you can figure out the equation that made it based on the starting values. There are things you can do to counteract this however. In addition to extremely complicated processes, you can also add in values taken from sources besides the entered information, referred to as SALT. This can include things like the time, the number of times the algorithm has been used in the past hour, how many days till the next full moon, as long as the number would be hard to predict and recreate then it’ll make for good salt. All of these techniques and requirements for a strong algorithm means that they are expensive to make and maintain, which means there are only a handful of commonly used ones that meet the sort of high security requirements many organizations require. Which means there is a lot of money to be made in breaking them, finding out how to reverse them, and rendering a major security feature ineffective.
+
+If you want to be a boxer, you have to spar. You can spend as many hours as you want hitting a speed bag, jumping rope, working on your footwork or lifting weights as you like, but unless you have experience in a ring, you’ll never be ready for an actual fight. Cybersecurity is the sameYou can spend countless dollars and hours, spend all your time researching the most complex mathematical theorems for cryptography and rack your brain finding obscure places to grab salt variables from, but none of that will matter if it can’t survive a real cracking attack. 
+
+The way you test that is with password dumps. Password dumps are large banks of plaintext passwords taken from past data breaches. When a data breach occurs to an encrypted bank of passwords, attackers will take the passwords that have been encrypted with a hashing algorithm and password dumps of other organizations where the passwords are in plain text. They then run the plain text passwords through the algorithm used on the encrypted passwords (or through several if they don’t know what algorithm is in use) and look for matches. The logic here is that if these passwords are being used in other places, it is statistically likely that one of the users in this new dump will have the same. Over time, once enough matches have been found for one algorithm, it’s possible to begin breaking the algorithm itself by reverse engineering what is going on inside of it. So if you want to make sure your algorithm is secure, you have to run these password dump matching attempts (referred to as dictionary attacks) against your own algorithm and plug the gaps yourself before someone else finds them.
+
+In 2009, one of the biggest data breaches of plain text passwords, the kind used in these tests, happened to a site called rockyou.com. Rockyou.com was a social media adjacent site - mostly full of little games and photo editing apps that you could connect back to your main social media sites. In order to connect, rockyou.com would store both the login info for a users rockyou.com account and for their other social media sites on their own servers. This meant that when they got breached, anyone who used their site had their rockyou.com login and their other social media logins leaked in plain text. This lead to a 32.3 million user records being leaked in an infamous password dump called rockyou.txt. 
+
+This report will go over the content of rockyou.txt and compare it to other, more modern password dumps in order to show how passwords have changed since 2009. It will also discuss data breaches, their frequency, and who they happen to in order to also discuss where these dumps come from and what people need to be most watchful of if they want to maintain their own personal security. 
+
+### Part 0: The Data
+
+Packages are mostly standard, I have left comments next to the non standard ones to show their purpose.
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stringr) #operations for passwords
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(base) #arrived and wont leave quietly
+library(grid) #facet shape and size
+library(gtable)
+library(scales)#for removing SciNot from graphs
+library(treemapify) # for Tree maps
+library(ggrepel) # for text wizard stuff
+```
+
+Data cleaning is simple to explain and far more of a problem then I could have ever predicted. 
+
+The file is read in, turned into a dataframe of one column, then every word in the column is split into individual letters and each letter is given a column in the same row. This caused some major issues however and the easiest way to handle that was to drop everything above 25 characters. Almost every password over 24 characters was the result of an error that made giant chunks of the list become one entry and the total number of dropped rows was less than 30,000 between the rockyou.txt password dump and the crackstation password dump, which were 4.5 million records and 6.8 million records each. I then  assigned each of those columns a number from 0-24 and dropped the “0” column. This was done because when the data set was read in, the first position for every line was always NA and it threw off counts and placement needed for later functions. After that it was all pushed into a csv so that the function didn’t have to be run every time as the data caused massive system slow downs and more powerful computer hardware had to be requisitioned in order to have these run in a timely manner. 
+
+cleaning and splitting rockyou, commented out. Source: https://archive.org/details/rockyou.txt 
+```{r}
+#rockyou <- read.table(file = "rockyou.txt", sep = "\n")
+#rockyou <- data.frame(rockyou)
+#rockyou <- data.frame(rockyou[!c((nchar(rockyou$V1 , allowNA = TRUE) >= 25)),])
+#rockyou <- separate(rockyou, rockyou..c..nchar.rockyou.V1..allowNA...TRUE.....25....., c("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15", "16", "17", "18", "19", "20", "21", "22", "23", "24"), sep = "")
+#rockyou <- rockyou[c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15", "16", "17", "18", "19", "20", "21", "22", "23", "24")]
+#write.csv(rockyou, "rockyouClean.csv", row.names = FALSE)
+```
+rock you 2021 file clean and split, commented out Source: https://crackstation.net/crackstation-wordlist-password-cracking-dictionary.htm
+``` {r}
+#rockyou2021 <- read.table(file = "realhuman_phill.txt", sep = "\n")
+#rockyou2021 <- data.frame(rockyou2021)
+#rockyou2021 <- data.frame(rockyou2021[!c((nchar(rockyou2021$V1 , allowNA = TRUE) >= 25)),])
+#rockyou2021 <- data.frame((separate(rockyou2021, rockyou2021..c..nchar.rockyou2021.V1..allowNA...TRUE.....25...., c("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15", "16", "17", "18", "19", "20", "21", "22", "23", "24"), sep = "")))
+#rockyou2021 <- rockyou2021[c("X1","X2","X3","X4","X5","X6","X7","X8","X9","X10","X11","X12","X13","X14","X15", "X16", "X17", "X18", "X19", "X20", "X21", "X22", "X23", "X24")]
+#write.csv(rockyou2021, "rockyou21Clean.csv", row.names = FALSE)
+```
+
+This code is left over from working on the graphs. These functions existed to assist with speed while testing. The size of the data caused long stretches of downtime while testing, so smaller datasets led to faster testing. commented out.
+```{r}
+
+#rockyouTEST <- rockyouTEST %>%  filter(!row_number() %in% c(115128,133338))
+#rockyouTEST <- data.frame(rockyouTEST[!c((nchar(rockyouTEST$V1 , allowNA = TRUE) >= 24)),])
+#rockyouTEST <- separate(rockyouTEST, rockyouTEST..c..nchar.rockyouTEST.V1..allowNA...TRUE.....24..., c("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15", "16", "17", "18", "19", "20", "21", "22", "23", "24"), sep = "")
+#rockyouTEST <- head(rockyou,10000)
+#rockyouTEST21 <- head(rockyou2021,10000)
+```
+
+File Read in
+```{r}
+rockyou <- read.csv("rockyouClean.csv")
+rockyou2021 <- read.csv("rockyou21Clean.csv")
+glimpse(rockyou)
+```
+
+```{r}
+glimpse(rockyou2021)
+```
+
+
+### Part 1: rockyou.txt
+
+How long is the average password?
+The first graph was a very simply process, created a column that was a sum of all non na values for each row and then graphed onto a histogram. I also added in a mean line for easier comparison later.
+```{r}
+lengthCompare <- rockyou
+lengthCompare$count <- rowSums(!is.na(lengthCompare[-1]))
+lengthCompare %>% ggplot(aes(count)) + geom_histogram(bins = 24, color = "black", fill = "blue") + geom_vline(aes(xintercept = mean(count)), color = "black", linetype = "dashed") + ggtitle("Average Password Length (2009)") + ylab("Count of Passwords") + xlab("Length of Password")
+
+```
+The graph is as you would expect for a site with no password requirements, a giant spike around 5 character passwords, a spike at 7, the average, and then trending downwards the longer the passwords get. 
+Most people prefer an easy login and this graph reflects that. Rockyou.com had a length requirement of 6 at the time of the breach, which was standard at the time. The existence of items under 6 is due to rockyou not requiring length beyond 1 at its inception, and some records of users who had not logged in since the required change had never been updated.
+
+What is the most common character used in each position of the password?
+For this graph, the function finds the most common value for each column, assigns it to a variable as a named int. All of those named ints go into a vector, and then use the enframe command to make a dataframe with the letters and the values separated into columns. I then pushed a column full of the "position" to identify it.
+```{r}
+commonDF <- rockyou
+
+X1 <- sort(table(commonDF$X1),decreasing=TRUE)[1]
+X2 <- sort(table(commonDF$X2),decreasing=TRUE)[1]
+X3 <- sort(table(commonDF$X3),decreasing=TRUE)[1]
+X4 <- sort(table(commonDF$X4),decreasing=TRUE)[1]
+X5 <- sort(table(commonDF$X5),decreasing=TRUE)[1]
+X6 <- sort(table(commonDF$X6),decreasing=TRUE)[1]
+X7 <- sort(table(commonDF$X7),decreasing=TRUE)[1]
+X8 <- sort(table(commonDF$X8),decreasing=TRUE)[1]
+X9 <- sort(table(commonDF$X9),decreasing=TRUE)[1]
+X10 <- sort(table(commonDF$X10),decreasing=TRUE)[1]
+X11 <- sort(table(commonDF$X11),decreasing=TRUE)[1]
+X12 <- sort(table(commonDF$X12),decreasing=TRUE)[1]
+X13 <- sort(table(commonDF$X13),decreasing=TRUE)[1]
+X14 <- sort(table(commonDF$X14),decreasing=TRUE)[1]
+X15 <- sort(table(commonDF$X15),decreasing=TRUE)[1]
+X16 <- sort(table(commonDF$X16),decreasing=TRUE)[1]
+X17 <- sort(table(commonDF$X17),decreasing=TRUE)[1]
+X18 <- sort(table(commonDF$X18),decreasing=TRUE)[1]
+X19 <- sort(table(commonDF$X19),decreasing=TRUE)[1]
+X20 <- sort(table(commonDF$X20),decreasing=TRUE)[1]
+X21 <- sort(table(commonDF$X21),decreasing=TRUE)[1]
+X22 <- sort(table(commonDF$X22),decreasing=TRUE)[1]
+X23 <- sort(table(commonDF$X23),decreasing=TRUE)[1]
+X24 <- sort(table(commonDF$X24),decreasing=TRUE)[1]
+most <- c(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10,X11,X12,X13,X14,X15,X16,X17,X18,X19,X20,X21,X22,X23,X24)
+#frequencyDF <- data.frame(as.list(most))
+frequencyDF <- enframe(most, name = "Character", value = "Frequency")
+frequencyDF$Position <- seq(1,24)
+```
+
+After that, I graphed it on a bar graph with the most common character at the top.
+ 
+```{r}
+plot5 <- frequencyDF %>% 
+  ggplot(aes(x = Position, y = Frequency)) + geom_col(label = frequencyDF$Character, color = "black", fill = "blue") + geom_text(aes(label = Character), vjust = -.5) + ggtitle("Most Common Character By Position (2009)")
+plot5 + scale_y_continuous(labels = label_comma())
+```
+
+While the frequency of lowercase m is shocking, the massive spike of a isn't when you consider that in every password dump ever, the most common password is always “password” and if it isn’t, then the most common passwords will be “password” with whatever requirements that the system implemented for password complexity, i.e. if the system requires a capital, it’ll be “Password” or if it needs that and a symbol  it might be “Password!” or “Password?”. People generally don’t change the a when they do this which is why that one sticks so far out. Outside of that spike, pretty much every other column is a very close race between the winner and every other lower case letter. 
+
+
+What are people using for their passwords?
+This one hurt and was the biggest time sink. After a lot of different methods were tried that didn't work, this is what ended up being the best way I could find. I made a function that checks if the input is in a set of vectors called lower, upper and numbers. I didn't make a symbols vector since that could be almost anything and it was easier to just consider it a symbol if it didn't fit the other 3 types. 
+
+```{r}
+uppers <- LETTERS[1:26]
+lowers <- letters[1:26]
+numbers <- seq(0,9)
+
+catDecider <- function(x) {
+  #check <- x
+  if(x %in% lowers){
+    return(1)
+  }
+  else if (x %in% uppers){
+    return(2)
+  }
+  else if (x %in% numbers) {
+    return(3)
+  }
+  return (4)
+}
+
+```
+
+So it looks through the entire frame using the for loop, checks what type of symbol it is, then replaces it with the corresponding number. This function takes a very long time to run through the whole function, long enough that it needed to be cut down to 100000 records in order to have it run in less than an hour. After that, I grouped the data by the category and then by character, made a stacked bar graph with the color as the category, the X as the position and the height and fill by the count.
+```{r}
+#characterStackcsv <- rockyou[sample(nrow(rockyou), 100000), ]
+#write.csv(characterStackcsv, "sample2009.csv", row.names = FALSE)
+```
+Function to prevent issues with randomness causing unexpected reacionts when knitting, commented out
+
+```{r}
+characterStack <- read.csv("sample2009.csv")
+for (j in 1:nrow(characterStack)) {
+  for (i in 1:ncol(characterStack)) {
+    if (!is.na(characterStack[j,i])) {
+      characterStack[j,i] <- catDecider(characterStack[j,i])
+    }
+  }
+}
+```
+
+```{r}
+X1 <- table(characterStack$X1)
+X2 <- table(characterStack$X2)
+X3 <- table(characterStack$X3)
+X4 <- table(characterStack$X4)
+X5 <- table(characterStack$X5)
+X6 <- table(characterStack$X6)
+X7 <- table(characterStack$X7)
+X8 <- table(characterStack$X8)
+X9 <- table(characterStack$X9)
+X10 <- table(characterStack$X10)
+X11 <- table(characterStack$X11)
+X12 <- table(characterStack$X12)
+X13 <- table(characterStack$X13)
+X14 <- table(characterStack$X14)
+X15<- table(characterStack$X15)
+X16 <- table(characterStack$X16)
+X17 <- table(characterStack$X17)
+X18<- table(characterStack$X18)
+X19<- table(characterStack$X19)
+X20 <- table(characterStack$X20)
+X21 <- table(characterStack$X21)
+X22 <- table(characterStack$X22)
+X23 <- table(characterStack$X23)
+X24 <- table(characterStack$X24)
+
+most <- c(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10,X11,X12,X13,X14,X15,X16,X17,X18,X19,X20,X21,X22,X23,X24)
+catDF <- enframe(most, name = "Type", value = "Frequency")
+catDF$Position <- c(1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,15,16,16,16,16,17,17,17,17,18,18,18,18,19,19,19,19,20,20,20,20,21,21,21,21,22,22,22,22,23,23,23,23,24,24,24,24)
+catDF <- catDF %>% group_by(catDF$Position)
+plot6 <- catDF %>% ggplot(aes(x = Position , y = Frequency, fill = Type )) + geom_col() + ggtitle("Frequency of Character Types By Position (2009)")+ scale_fill_discrete(labels=c('Lowercase Letters', 'Uppercase Letters', "Numbers", "Symbols"))
+
+plot6 + scale_y_continuous(labels = label_comma())
+```
+
+So the clear favorite here is lower case letter, which tracks with other observations, that whatever is easiest will be the most popular. Coming in at second is numbers, then uppercase and symbols.
+Interesting things to note, capital letters trend downwards in terms of frequency the further along the password, but numbers and symbols increase, with symbols (despite being hard to see) increasing as the potential "end" of the passwords by a lot.
+
+This is a good visual of what bad passwords look like. They are quick to type and they are really easy to remember. But times have changed since 2009 and security standards have gotten a lot higher as a result of the web being used for more important things. So you would hope we had gotten better, yeah?
+
+
+
+### Part 2: Modern passwords
+For the comparison data, I used a data set of human generated passwords from a site called crackstation.net. This site provides password dumps for dictionary attacks to whoever needs them. This data set is a combination of multiple dumps. This is because dumps like rockyou.txt happen very rarely in that size. Most dumps barely top 500,000 records of plaintext or easily broken information. 
+
+All code for these graphs is the same as was run for the original set of data applied to the new data. 
+
+Let's see what kind of passwords we are dealing with today
+
+How long is the average password now?
+```{r}
+lengthCompare2021 <- rockyou2021
+lengthCompare2021$count <- rowSums(!is.na(lengthCompare2021[-1]))
+plot4 <- lengthCompare2021 %>% ggplot(aes(lengthCompare2021$count)) + geom_histogram(bins = 24, color = "black", fill = "red")+ geom_vline(aes(xintercept = mean(count)), color = "black", linetype = "dashed") + ggtitle("Average Password Length (2021)") + ylab("Count of Passwords") + xlab("Length of Password")
+plot4 <- plot4 + scale_y_continuous(labels = label_comma())
+
+```
+In terms of length of password, not much changed from back then to now. The mean moved slightly from around 7 to closer to eight and there has been a small shift in density from before 7 to after 7, balancing things out a little more. However, other than that it remains roughly the same.
+
+What is the most common value. 
+```{r}
+commonDF21 <- rockyou2021
+#I hate this, can't find a better way to do it so copy and paste bot go!
+X1 <- sort(table(commonDF21$X1),decreasing=TRUE)[1]
+X2 <- sort(table(commonDF21$X2),decreasing=TRUE)[1]
+X3 <- sort(table(commonDF21$X3),decreasing=TRUE)[1]
+X4 <- sort(table(commonDF21$X4),decreasing=TRUE)[1]
+X5 <- sort(table(commonDF21$X5),decreasing=TRUE)[1]
+X6 <- sort(table(commonDF21$X6),decreasing=TRUE)[1]
+X7 <- sort(table(commonDF21$X7),decreasing=TRUE)[1]
+X8 <- sort(table(commonDF21$X8),decreasing=TRUE)[1]
+X9 <- sort(table(commonDF21$X9),decreasing=TRUE)[1]
+X10 <- sort(table(commonDF21$X10),decreasing=TRUE)[1]
+X11 <- sort(table(commonDF21$X11),decreasing=TRUE)[1]
+X12 <- sort(table(commonDF21$X12),decreasing=TRUE)[1]
+X13 <- sort(table(commonDF21$X13),decreasing=TRUE)[1]
+X14 <- sort(table(commonDF21$X14),decreasing=TRUE)[1]
+X15 <- sort(table(commonDF21$X15),decreasing=TRUE)[1]
+X16 <- sort(table(commonDF21$X16),decreasing=TRUE)[1]
+X17 <- sort(table(commonDF21$X17),decreasing=TRUE)[1]
+X18 <- sort(table(commonDF21$X18),decreasing=TRUE)[1]
+X19 <- sort(table(commonDF21$X19),decreasing=TRUE)[1]
+X20 <- sort(table(commonDF21$X20),decreasing=TRUE)[1]
+X21 <- sort(table(commonDF21$X21),decreasing=TRUE)[1]
+X22 <- sort(table(commonDF21$X22),decreasing=TRUE)[1]
+X23 <- sort(table(commonDF21$X23),decreasing=TRUE)[1]
+X24 <- sort(table(commonDF21$X24),decreasing=TRUE)[1]
+most21 <- c(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10,X11,X12,X13,X14,X15,X16,X17,X18,X19,X20,X21,X22,X23,X24)
+#frequencyDF <- data.frame(as.list(most))
+frequencyDF21 <- enframe(most21, name = "Character", value = "Frequency")
+frequencyDF21$Position <- seq(1,24)
+```
+
+```{r}
+plot6 <- frequencyDF21 %>%  ggplot(aes(x = Position, y = Frequency)) + geom_col(label = frequencyDF21$Character, color = "black", fill = "red") + geom_text(aes(label = Character), vjust = -.5) + ggtitle("Most Common Character By Position (2021)")
+plot6 <- plot6 + scale_y_continuous(labels = label_comma())
+```
+Favorite character for 2021 data set actually looked a lot closer to how I had expected the first one to look. The values here work the same as before, where all values are in close contention with the other values, most “winners” not winning by more than around a quarter of a percent. There are also no strange spikes for this one. 
+```{r}
+#characterStackcsv21 <- rockyou2021[sample(nrow(rockyou2021), 100000), ]
+#write.csv(characterStackcsv21, "sample2021.csv", row.names = FALSE)
+```
+Function to prevent issues with randomness causing unexpected reacionts when knitting, commented out
+
+```{r}
+characterStack21 <- read.csv("sample2021.csv")
+for (j in 1:nrow(characterStack21)) {
+  for (i in 1:ncol(characterStack21)) {
+    if (!is.na(characterStack21[j,i])) {
+      characterStack21[j,i] <- catDecider(characterStack21[j,i])
+    }
+  }
+}
+```
+
+```{r}
+X1 <- table(characterStack21$X1)
+X2 <- table(characterStack21$X2)
+X3 <- table(characterStack21$X3)
+X4 <- table(characterStack21$X4)
+X5 <- table(characterStack21$X5)
+X6 <- table(characterStack21$X6)
+X7 <- table(characterStack21$X7)
+X8 <- table(characterStack21$X8)
+X9 <- table(characterStack21$X9)
+X10 <- table(characterStack21$X10)
+X11 <- table(characterStack21$X11)
+X12 <- table(characterStack21$X12)
+X13 <- table(characterStack21$X13)
+X14 <- table(characterStack21$X14)
+X15 <- table(characterStack21$X15)
+X16 <- table(characterStack21$X16)
+X17 <- table(characterStack21$X17)
+X18 <- table(characterStack21$X18)
+X19 <- table(characterStack21$X19)
+X20 <- table(characterStack21$X20)
+X21 <- table(characterStack21$X21)
+X22 <- table(characterStack21$X22)
+X23 <- table(characterStack21$X23)
+X24 <- table(characterStack21$X24)
+
+most <- c(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10,X11,X12,X13,X14,X15,X16,X17,X18,X19,X20,X21,X22,X23,X24)
+catDF21 <- enframe(most, name = "Type", value = "Frequency")
+catDF21$Position <- c(1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,15,16,16,16,16,17,17,17,17,18,18,18,18,19,19,19,19,20,20,20,20,21,21,21,21,22,22,22,22,23,23,23,23,24,24,24)
+catDF21 <- catDF21 %>% group_by(catDF21$Position)
+plot7 <- catDF21 %>% ggplot(aes(x = catDF21$Position , y = catDF21$Frequency, fill = catDF21$Type )) + geom_col() +
+ggtitle("Frequency of Character Types By Position (2021)")+ scale_fill_discrete(labels=c('Lowercase Letters', 'Uppercase Letters', "Numbers", "Symbols"))
+plot7 + scale_y_continuous(labels = label_comma())
+```
+
+This the biggest difference in password composition in the last 10 years. As you can see there is a way larger spread in type usage for every single bar on this graph. The number of lowercase letters that are in use has dropped dramatically from being the default to being tied with uppercase. Numbers have stayed around the same and symbols have increased in usage by quite a bit. So while most favored character and length did not do much changing, the actual compositions of the passwords have changed a lot. 
+
+Overall passwords have increased in complexity dramatically compared previous years, which is great since it makes them even harder to crack.
+
+
+
+### Part 3: Data Breaches
+It is important in this conversation to talk also about things outside of password security. It is one thing to have an extremely secure hashing system, but if there is nothing preventing it from being breached in the first place, then it cannot be said to truly be secure.
+
+This next set is data breaches from 2004 to 2021. This is a set of data from Kaggle (https://www.kaggle.com/datasets/hishaamarmghan/list-of-top-data-breaches-2004-2021) that is simply an organization of the list of data breaches from the Wikipedia entry. There are hundreds if not thousands, if not, millions of data breaches every day and finding ones that are actually purposeful, relevant and large enough to be of any concern is important when considering the wider landscape. That’s why this data set works well for it, as they mostly concern public companies and large incidents. 
+
+
+
+The original data set is just a cleaning and reorganizing of information taken from Wikipedia. You can see we have five columns:
+Entity: which orginization was actually breached.
+Year: when did the event happen.
+Records: the number of PII records that were released 
+Orginization.type: what general industry do they work in
+Method: what actually caused the data breach to occur. 
+
+Cleaning this was not easy in terms of data quality. There were too many organization types and methods to properly organize by either category. I went through them manually to try and weed out typos and capitalization issues and found further issues. There were many attempts to dual categorize that were removed, along with using two synonyms to describe the same thing and leading to two incidents that should be grouped together not being so. And since it was only about 250 rows of data, I just went through very briefly and fixed all of that by hand, pairing down the categories and methods to around 10 each. 
+
+```{r}
+databeach <- read.csv("DataBreaches(2004-2021).csv") #the typo comforts my sanity bereft brain, so it gets to stay
+databeach <- databeach[!(databeach$Organization.type == "hotel" | databeach$Organization.type == "online marketing" | databeach$Organization.type == "advertising" | databeach$Organization.type == "media" | databeach$Organization.type == "publisher (magazine)" | databeach$Organization.type == "transport" | databeach$Organization.type == "energy" | databeach$Organization.type == "mobile carrier" | databeach$Organization.type == "restaurant" ),]
+glimpse(databeach)
+```
+
+what industries are being hacked most frequently?
+I grouped the incidents by their organization type and then year. Afterwards I summarized the records stolen for each year and then plotted that onto a line graph that I then faceted by industry.
+
+I then put the actual records through a log function for better viewing simply because the scale was between around 10,000 at the lowest and around 900 million at the highest. The new scale allows for the information to be better understood at a glance. 
+```{r}
+whoDF <- databeach %>% group_by(Organization.type, Year) %>% summarize(Recrods_Total = (sum(Records)))
+options(repr.plot.width = 10, repr.plot.height =10)
+whoDF %>% ggplot(aes(x = Year, y = log(Recrods_Total), color = Organization.type)) + geom_point()+geom_line(group = 1)+ facet_grid(rows = vars(Organization.type), space = "free_y") + ggtitle("Records Leaked Over Time by Industry ") + ylab("Total Records (log)")
+
+```
+In terms of records stolen academic records tend to stay pretty secure. Financial records have good years and bad years. The worst by far is web records and healthcare. Web records had a banner year for breaches in 2013 when both yahoo and tumblr had data breaches that accounted for web being so much of an outlier that it was the main reason for the log function being implemented. Healthcare’s worst year was 2019 when a company called 21st Century Oncology leaked 900 million records in 2019. 
+
+
+What is causing the hacks?
+In order to find this, the code I used was almost identical to the previous block except for two things. First, it was grouped by method rather than orginization type and Second, it was placed in a tree map instead of a line graph. This works better for this as it shows the weight of each breach type. 
+```{r}
+whyDF <- databeach %>% group_by(Organization.type, Method) %>%  summarize (total_rec = sum(Records)) #%>% summarize ("Total Incidents" = nrow(Records))
+whyDF %>% ggplot(aes(area = total_rec, fill = Method)) + geom_treemap() + facet_grid(row = vars(Organization.type)) + ggtitle("Causes of Databreach by Industry")
+```
+
+First most common method is “External threat actor”, which is generally what you think of when you hear about hacking. Outside actors force their way into a network via some sort of exploit or unknown backdoor. Second is negligence, which is like saying “the reason the house was robbed was because they never added a lock”. Organizations sometimes do not perform the most basic procedures as required for their industry and it leads to people basically walking into their network and stealing data. 
+
+Another notable “unknown”. There is a AT&T breach that occurred in 2019 that still has an unknown cause. This makes up the large pink bar for telecommunications. 
+
+### Conclusion
+
+At the end of the day, nothing can be truly be done to ensure total security. There will always be some slip up, some mistake, some inside threat that leads to a seemingly perfect company having their network breached and their user data put into the hands of malicious actors. The best way to prevent that is to make sure you are varying your passwords between sites so even if one is stolen, the rest don’t fall with it.
+
+And people seem to be learning this lesson over time. Passwords are getting better, more complex and varied, and breaches are decreasing in frequency in most industries. Security is getting better, but the people out to break it are getting better as well, so we have to remain on our toes and make sure 
+
+
